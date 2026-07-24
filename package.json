@@ -1,0 +1,33 @@
+{
+  "name": "slack-ai-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s-shubham-22/slack-ai-agent.git"
+  },
+  "keywords": [],
+  "author": "Shubham Sareliya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/s-shubham-22/slack-ai-agent/issues"
+  },
+  "homepage": "https://github.com/s-shubham-22/slack-ai-agent#readme",
+  "dependencies": {
+    "@langchain/core": "^1.2.3",
+    "@langchain/groq": "^1.3.1",
+    "@slack/bolt": "^5.0.0",
+    "@slack/web-api": "^8.0.0",
+    "axios": "^1.18.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.22.0"
+  }
+}
