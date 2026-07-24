@@ -57,9 +57,9 @@ curl --location 'localhost:3000/test/analyze-member' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "memberInfo": {
-        "name": "Shubham Sareliya",
-        "email": "shubham.sareliya@crestdata.ai",
-        "title": "Software Engineer (E3) at Crest Data"
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "title": "Software Engineer at Google"
     }
 }'
 ```

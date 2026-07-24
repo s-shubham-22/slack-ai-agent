@@ -1,11 +1,17 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { log } from '../config/logger.js';
 import { analyzeAndPostMember } from '../services/memberService.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export function setupExpress() {
 	const app = express();
 
 	app.use(express.json());
+	app.use(express.static(path.join(__dirname, '../../public')));
 
 	app.get('/health', (req, res) => {
 		res.json({

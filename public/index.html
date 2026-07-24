@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slack AI Agent - Test Endpoint</title>
+    <meta name="description"
+        content="Test the Slack AI Agent member analysis endpoint locally with a beautiful modern UI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect>
+                    <circle cx="12" cy="5" r="2"></circle>
+                    <path d="M12 7v4"></path>
+                    <line x1="8" y1="16" x2="8.01" y2="16"></line>
+                    <line x1="16" y1="16" x2="16.01" y2="16"></line>
+                </svg>
+                <span>Slack AI Agent</span>
+            </div>
+            <h1>Member Analysis Tester</h1>
+            <p>Trigger the AI analysis workflow and Slack bot locally.</p>
+        </header>
+
+        <main class="main-content">
+            <form id="analyzeForm" class="glass-panel">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="e.g. John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="e.g. john.doe@company.ai" required>
+                </div>
+                <div class="form-group">
+                    <label for="title">Job Title</label>
+                    <input type="text" id="title" name="title" placeholder="e.g. Software Engineer" required>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-primary">
+                    <span class="btn-text" id="btnText">Analyze Member</span>
+                    <div class="spinner hidden" id="loadingSpinner"></div>
+                </button>
+                <div id="errorMessage" class="error-message hidden"></div>
+            </form>
+
+            <div id="resultsPanel" class="glass-panel results-panel hidden">
+                <div class="results-header">
+                    <h2>Analysis Results</h2>
+                    <div class="score-badge" id="scoreBadge">
+                        <span id="scoreValue">0</span><span class="score-total">/100</span>
+                    </div>
+                </div>
+
+                <div class="results-section">
+                    <h3>💡 Key Insights</h3>
+                    <ul id="insightsList" class="results-list"></ul>
+                </div>
+
+                <div class="results-section">
+                    <h3>🚀 Recommendations</h3>
+                    <ul id="recommendationsList" class="results-list"></ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
