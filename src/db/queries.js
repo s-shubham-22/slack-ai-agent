@@ -1,22 +1,5 @@
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL,
-	ssl: { rejectUnauthorized: false },
-	max: 20,
-	idleTimeoutMillis: 30000,
-	connectionTimeoutMillis: 2000,
-});
-
-pool.on('connect', () => {
-	console.log('[INFO] Database connected successfully');
-});
-pool.on('error', (err) => {
-	console.log('[ERROR] Unexpected database error:', err.message);
-});
+import pool from './index.js';
+import { log } from '../config/logger.js';
 
 export async function initDatabase() {
 	const client = await pool.connect();
@@ -47,9 +30,9 @@ export async function initDatabase() {
       CREATE INDEX IF NOT EXISTS idx_analyzed_at ON member_analyses(analyzed_at);
     `);
 
-		console.log('[INFO] Database schema initialized successfully');
+		log.info('Database schema initialized successfully');
 	} catch (error) {
-		console.log('[ERROR] Database initialization failed:', error.message);
+		log.error('Database initialization failed:', error.message);
 		throw error;
 	} finally {
 		client.release();
@@ -85,14 +68,14 @@ export async function saveMemberAnalysis(memberInfo, analysis, researchData) {
 			],
 		);
 
-		console.log(
-			`[INFO] Analysis saved to database with id: ${result.rows[0].id}`,
+		log.info(
+			`Analysis saved to database with id: ${result.rows[0].id}`,
 		);
 
 		return result.rows[0].id;
 	} catch (error) {
-		console.error(
-			'[ERROR] Failed to save analysis to database:',
+		log.error(
+			'Failed to save analysis to database:',
 			error.message,
 		);
 		throw error;
@@ -114,10 +97,10 @@ export async function markAsSentToSlack(analysisId) {
 			[analysisId],
 		);
 
-		console.log(`[INFO] Marked analysis ${analysisId} as sent to Slack`);
+		log.info(`Marked analysis ${analysisId} as sent to Slack`);
 	} catch (error) {
-		console.error(
-			'[ERROR] Failed to mark analysis as sent to Slack:',
+		log.error(
+			'Failed to mark analysis as sent to Slack:',
 			error.message,
 		);
 		throw error;
@@ -128,7 +111,5 @@ export async function markAsSentToSlack(analysisId) {
 
 export async function closeDatabase() {
 	await pool.end();
-	console.log('[INFO] Database connection closed');
+	log.info('Database connection closed');
 }
-
-export default pool;
