@@ -50,7 +50,13 @@ npm run dev
 You should see logs indicating that the database is connected, the server is running, and the Slack bot is connected.
 
 ### 4. Test the Integration
-You can test the member analysis functionality locally without needing someone to actually join the workspace. Run the following command in your terminal:
+You can test the member analysis functionality locally without needing someone to actually join the workspace. 
+
+**Option A: Using the Web UI (Recommended)**
+Open your browser and navigate to `http://localhost:3000`. You will see a modern web interface where you can enter a member's details and trigger the analysis directly.
+
+**Option B: Using cURL**
+Alternatively, run the following command in your terminal:
 
 ```bash
 curl --location 'localhost:3000/test/analyze-member' \
@@ -65,3 +71,18 @@ curl --location 'localhost:3000/test/analyze-member' \
 ```
 
 If everything is configured correctly, this will trigger the agent to analyze the member data, save it to the database, and the bot will post the generated report in the configured Slack channel.
+
+## Customization
+
+### Modifying the AI Prompt
+The agent uses a default prompt tailored to evaluating how a member fits with a commercial product. You can customize this prompt to fit your specific business requirements or community goals.
+
+To do this, open `src/services/aiService.js` and modify the template string inside the `analyzeWithAI` function:
+
+```javascript
+const prompt = ChatPromptTemplate.fromTemplate(`
+    // Write your custom system instructions here...
+`);
+```
+
+Make sure that your modified prompt still instructs the AI to return a JSON object with `fitScore`, `insights`, and `recommendations` keys so the application can process it correctly.
